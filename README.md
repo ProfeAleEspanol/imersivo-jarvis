@@ -1,6 +1,6 @@
-# Imersivo Jarvis
+# Imersão Vibe Code - Estrutura Jarvis
 
-Landing estática para o **Imersivo Jarvis**, uma versão focada na construção de um assistente pessoal com IA, voz, memória, ferramentas, agentes e automações.
+Landing estática para a **Imersão Vibe Code**, mantendo o mesmo imersivo, mas com a estrutura de construção focada em um **Jarvis com IA** em vez de uma plataforma SaaS.
 
 ## Publicação
 
@@ -15,7 +15,8 @@ Configuração recomendada na Vercel:
 
 ## Dados do imersivo
 
-- Nome: **Imersivo Jarvis**
+- Nome: **Imersão Vibe Code**
+- Estrutura/produto final: **Jarvis com IA**
 - Data: **26 a 28 de junho de 2026**
 - Local: **Refúgio Inema, Canela - RS**
 - Valor promocional: **R$ 2.000**
