@@ -1,0 +1,717 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Imersivo Jarvis | Crie seu assistente pessoal com IA</title>
+<meta name="description" content="Imersivo presencial para criar um assistente pessoal com IA, voz, memória, ferramentas, automações e integrações.">
+<meta property="og:title" content="Imersivo Jarvis">
+<meta property="og:description" content="De 26 a 28 de junho de 2026, no Refúgio Inema, em Canela - RS. Crie seu assistente pessoal com IA.">
+<meta property="og:type" content="website">
+<meta property="og:image" content="assets/hero-jarvis.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&family=Space+Grotesk:wght@500;600;700&display=swap" rel="stylesheet">
+<style>
+:root {
+  --bg: #05060a;
+  --ink: #f7f7fb;
+  --muted: #a7abb7;
+  --line: rgba(255,255,255,.12);
+  --glass: rgba(255,255,255,.06);
+  --yellow: #facc15;
+  --cyan: #38bdf8;
+  --violet: #a855f7;
+  --green: #34d399;
+}
+
+* { box-sizing: border-box; }
+html { scroll-behavior: smooth; }
+body {
+  margin: 0;
+  background: var(--bg);
+  color: var(--ink);
+  font-family: Inter, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+  line-height: 1.5;
+  overflow-x: hidden;
+}
+a { color: inherit; text-decoration: none; }
+.shell { width: min(1120px, calc(100% - 40px)); margin: 0 auto; }
+
+.button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 52px;
+  padding: 0 24px;
+  border-radius: 8px;
+  font-weight: 900;
+  border: 1px solid transparent;
+  transition: transform .18s ease, box-shadow .18s ease, background .18s ease;
+}
+.button:hover { transform: translateY(-2px); }
+.button-primary {
+  color: #080808;
+  background: var(--yellow);
+  box-shadow: 0 18px 54px -20px rgba(250,204,21,.9);
+}
+.button-secondary {
+  background: rgba(255,255,255,.08);
+  border-color: var(--line);
+  color: #fff;
+}
+.button-secondary:hover { background: rgba(255,255,255,.12); }
+
+.topbar {
+  position: relative;
+  z-index: 20;
+  background: var(--yellow);
+  color: #080808;
+  text-align: center;
+  font-size: 15px;
+  font-weight: 900;
+  padding: 11px 14px;
+}
+.nav {
+  position: sticky;
+  top: 0;
+  z-index: 20;
+  border-bottom: 1px solid var(--line);
+  background: rgba(5,6,10,.78);
+  backdrop-filter: blur(16px);
+}
+.nav-inner {
+  height: 64px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 20px;
+}
+.brand {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-family: "Space Grotesk", Inter, sans-serif;
+  font-weight: 900;
+}
+.brand-mark {
+  width: 26px;
+  height: 26px;
+  border-radius: 8px;
+  background: linear-gradient(135deg, var(--yellow), var(--cyan) 55%, var(--violet));
+  box-shadow: 0 0 30px rgba(250,204,21,.35);
+}
+.nav-links {
+  display: flex;
+  align-items: center;
+  gap: 18px;
+  color: var(--muted);
+  font-size: 14px;
+  font-weight: 800;
+}
+.nav-links a:hover { color: #fff; }
+
+.hero {
+  position: relative;
+  min-height: 86vh;
+  display: flex;
+  align-items: center;
+  overflow: hidden;
+  border-bottom: 1px solid var(--line);
+}
+.hero-image {
+  position: absolute;
+  inset: 0;
+  background-image:
+    linear-gradient(90deg, rgba(5,6,10,.97) 0%, rgba(5,6,10,.82) 45%, rgba(5,6,10,.32) 82%),
+    linear-gradient(180deg, rgba(5,6,10,.08), rgba(5,6,10,.82)),
+    url("assets/hero-jarvis.png");
+  background-size: cover;
+  background-position: center right;
+}
+.aurora {
+  position: absolute;
+  inset: -35% -15%;
+  opacity: .32;
+  filter: blur(70px);
+  background: conic-gradient(from 90deg at 50% 50%, var(--yellow), var(--cyan), var(--violet), #f43f5e, var(--yellow));
+  animation: spin 28s linear infinite;
+}
+@keyframes spin { to { transform: rotate(360deg); } }
+.noise {
+  position: absolute;
+  inset: 0;
+  opacity: .05;
+  mix-blend-mode: overlay;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='120' height='120'%3E%3Cfilter id='n'%3E%3CfeTurbulence baseFrequency='0.85' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='.7'/%3E%3C/svg%3E");
+}
+.hero-content {
+  position: relative;
+  z-index: 2;
+  width: min(820px, 100%);
+  padding: 84px 0 74px;
+}
+.eyebrow {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  padding: 8px 12px;
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  background: rgba(255,255,255,.07);
+  backdrop-filter: blur(12px);
+  color: #d7d9e0;
+  font-size: 14px;
+  font-weight: 900;
+  margin-bottom: 22px;
+}
+.pulse {
+  width: 9px;
+  height: 9px;
+  border-radius: 999px;
+  background: var(--green);
+  box-shadow: 0 0 22px rgba(52,211,153,.9);
+  animation: pulse 1.6s ease-in-out infinite;
+}
+@keyframes pulse { 50% { opacity: .35; transform: scale(.7); } }
+h1, h2, h3 { font-family: "Space Grotesk", Inter, sans-serif; letter-spacing: 0; margin: 0; }
+h1 {
+  font-size: 82px;
+  line-height: .98;
+  font-weight: 900;
+  max-width: 900px;
+}
+.grad {
+  color: transparent;
+  background: linear-gradient(90deg, var(--yellow), #fff2a8 46%, var(--cyan) 96%);
+  -webkit-background-clip: text;
+  background-clip: text;
+}
+.hero-date {
+  display: block;
+  margin: 0 0 18px;
+  color: #fff;
+  font-family: "Space Grotesk", Inter, sans-serif;
+  font-size: 40px;
+  line-height: 1.05;
+  font-weight: 900;
+}
+.hero-copy {
+  margin: 24px 0 16px;
+  max-width: 720px;
+  color: #d4d7df;
+  font-size: 20px;
+}
+.hero-highlight {
+  display: inline-flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 6px;
+  margin-top: 24px;
+  padding: 18px 20px;
+  border: 1px solid rgba(250,204,21,.32);
+  border-radius: 8px;
+  background: rgba(255,255,255,.075);
+  backdrop-filter: blur(14px);
+}
+.hero-highlight span {
+  color: var(--muted);
+  font-size: 14px;
+  font-weight: 900;
+  text-transform: uppercase;
+}
+.hero-highlight strong {
+  color: var(--yellow);
+  font-family: "Space Grotesk", Inter, sans-serif;
+  font-size: 38px;
+  line-height: 1;
+}
+.hero-highlight small {
+  color: #fff;
+  font-size: 24px;
+  font-weight: 900;
+}
+.hero-actions { display: flex; flex-wrap: wrap; gap: 12px; margin-top: 34px; }
+.hero-stats {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 10px;
+  margin-top: 42px;
+  max-width: 760px;
+}
+.stat {
+  min-height: 96px;
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  background: rgba(255,255,255,.06);
+  backdrop-filter: blur(10px);
+  padding: 15px;
+}
+.stat b {
+  display: block;
+  color: var(--yellow);
+  font-family: "Space Grotesk", Inter, sans-serif;
+  font-size: 29px;
+  line-height: 1;
+}
+.stat span {
+  display: block;
+  margin-top: 8px;
+  color: var(--muted);
+  font-size: 12px;
+  font-weight: 800;
+}
+
+.marquee {
+  border-bottom: 1px solid var(--line);
+  overflow: hidden;
+  padding: 14px 0;
+}
+.marquee-track {
+  display: inline-block;
+  white-space: nowrap;
+  color: rgba(255,255,255,.28);
+  font-family: "Space Grotesk", Inter, sans-serif;
+  font-size: 24px;
+  font-weight: 900;
+  animation: slide 22s linear infinite;
+}
+.marquee-track span { margin: 0 18px; }
+@keyframes slide { to { transform: translateX(-50%); } }
+
+.band { position: relative; padding: 86px 0; border-bottom: 1px solid var(--line); }
+.band-soft {
+  background:
+    linear-gradient(180deg, rgba(255,255,255,.035), rgba(255,255,255,.01)),
+    radial-gradient(80% 90% at 100% 0%, rgba(56,189,248,.10), transparent 60%);
+}
+.section-head { max-width: 780px; margin: 0 auto 34px; text-align: center; }
+.section-kicker {
+  color: var(--yellow);
+  font-size: 13px;
+  font-weight: 900;
+  text-transform: uppercase;
+  margin-bottom: 12px;
+}
+h2 { font-size: 42px; line-height: 1.08; font-weight: 900; }
+.section-head p, .lead { color: var(--muted); font-size: 18px; }
+
+.build-grid, .timeline, .contact-grid, .banner-links {
+  display: grid;
+  gap: 14px;
+}
+.build-grid { grid-template-columns: repeat(3, 1fr); }
+.timeline { grid-template-columns: repeat(3, 1fr); }
+.contact-grid, .banner-links { grid-template-columns: repeat(2, 1fr); }
+.build-item, .day, .contact-card, .offer-box, .banner-link {
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  background: var(--glass);
+  backdrop-filter: blur(14px);
+}
+.build-item { min-height: 142px; padding: 22px; }
+.check {
+  display: grid;
+  place-items: center;
+  width: 30px;
+  height: 30px;
+  border-radius: 8px;
+  color: #090909;
+  background: var(--yellow);
+  font-weight: 900;
+  margin-bottom: 18px;
+}
+.build-item h3 { font-size: 20px; margin-bottom: 7px; }
+.build-item p, .day p, .contact-card p, .banner-link p { margin: 0; color: var(--muted); }
+.day { min-height: 246px; padding: 24px; position: relative; overflow: hidden; }
+.day::after {
+  content: "";
+  position: absolute;
+  inset: auto 0 0;
+  height: 4px;
+  background: linear-gradient(90deg, var(--yellow), var(--cyan), var(--violet), #f43f5e);
+}
+.day-number { color: var(--yellow); font-size: 14px; font-weight: 900; text-transform: uppercase; margin-bottom: 16px; }
+.day h3 { font-size: 24px; margin-bottom: 10px; }
+
+.offer-wrap { max-width: 760px; margin: 0 auto; }
+.offer-box {
+  position: relative;
+  overflow: hidden;
+  padding: 42px;
+  text-align: center;
+  background:
+    linear-gradient(180deg, rgba(250,204,21,.13), rgba(255,255,255,.045)),
+    rgba(255,255,255,.05);
+}
+.badge {
+  display: inline-flex;
+  padding: 7px 12px;
+  border-radius: 8px;
+  background: var(--yellow);
+  color: #090909;
+  font-size: 12px;
+  font-weight: 900;
+  text-transform: uppercase;
+  margin-bottom: 20px;
+}
+.price-before { color: var(--muted); font-weight: 900; margin-top: 22px; }
+.price {
+  color: transparent;
+  background: linear-gradient(90deg, var(--yellow), #fff2a8, var(--cyan));
+  -webkit-background-clip: text;
+  background-clip: text;
+  font-family: "Space Grotesk", Inter, sans-serif;
+  font-size: 72px;
+  font-weight: 900;
+  line-height: 1;
+  margin: 8px 0;
+}
+.payment-note { color: var(--muted); margin: 0 0 26px; }
+.payment-actions {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 12px;
+  margin-bottom: 18px;
+}
+.security { display: flex; flex-wrap: wrap; justify-content: center; gap: 12px; color: var(--muted); font-size: 13px; font-weight: 800; margin-top: 18px; }
+
+.contact-card, .banner-link { padding: 26px; }
+.contact-card span, .banner-link span {
+  display: inline-flex;
+  margin-bottom: 14px;
+  color: var(--yellow);
+  font-size: 13px;
+  font-weight: 900;
+  text-transform: uppercase;
+}
+.contact-card h3 { font-size: 25px; margin-bottom: 10px; }
+.contact-card p { margin-bottom: 22px; }
+.banner-link {
+  position: relative;
+  overflow: hidden;
+  min-height: 188px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  background:
+    linear-gradient(135deg, rgba(250,204,21,.14), rgba(56,189,248,.07)),
+    rgba(255,255,255,.055);
+  transition: transform .18s ease, border-color .18s ease, background .18s ease;
+}
+.banner-link:hover {
+  transform: translateY(-3px);
+  border-color: rgba(250,204,21,.55);
+  background:
+    linear-gradient(135deg, rgba(250,204,21,.20), rgba(168,85,247,.10)),
+    rgba(255,255,255,.075);
+}
+.banner-link h3 { font-size: 34px; margin: 8px 0; }
+.banner-link strong { display: inline-flex; margin-top: 18px; color: #fff; font-size: 15px; font-weight: 900; }
+
+.final-cta {
+  position: relative;
+  overflow: hidden;
+  text-align: center;
+  padding: 76px 0;
+}
+.final-cta::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background:
+    linear-gradient(90deg, rgba(5,6,10,.97), rgba(5,6,10,.72), rgba(5,6,10,.97)),
+    url("assets/hero-jarvis.png");
+  background-size: cover;
+  background-position: center;
+  opacity: .9;
+}
+.final-cta .shell { position: relative; z-index: 1; }
+.final-cta p { color: #d5d8e0; margin-bottom: 26px; }
+footer { border-top: 1px solid var(--line); color: var(--muted); text-align: center; padding: 26px 0; font-size: 14px; }
+.mobile-cta { display: none; }
+
+.reveal { opacity: 0; transform: translateY(18px); transition: opacity .65s ease, transform .65s ease; }
+.reveal.in { opacity: 1; transform: none; }
+
+@media (max-width: 920px) {
+  .nav-links { display: none; }
+  .hero { min-height: auto; }
+  .hero-image {
+    background-image:
+      linear-gradient(180deg, rgba(5,6,10,.62), rgba(5,6,10,.97) 74%),
+      url("assets/hero-jarvis.png");
+    background-position: center top;
+  }
+  .hero-content { padding: 58vh 0 48px; }
+  h1 { font-size: 56px; }
+  .hero-date { font-size: 32px; }
+  .hero-copy { font-size: 18px; }
+  .hero-actions .button { width: 100%; }
+  .hero-stats, .build-grid, .timeline, .contact-grid, .banner-links { grid-template-columns: 1fr; }
+}
+@media (max-width: 640px) {
+  .shell { width: min(100% - 28px, 1120px); }
+  .topbar { font-size: 13px; }
+  .nav-inner { height: 58px; }
+  .brand { font-size: 14px; }
+  .nav .button { display: none; }
+  h1 { font-size: 42px; }
+  h2 { font-size: 30px; }
+  .hero-date { font-size: 26px; }
+  .hero-highlight strong { font-size: 31px; }
+  .hero-highlight small { font-size: 20px; }
+  .hero-content { padding-top: 50vh; }
+  .hero-stats { grid-template-columns: repeat(2, 1fr); }
+  .band { padding: 64px 0; }
+  .offer-box { padding: 32px 18px; }
+  .price { font-size: 52px; }
+  .payment-actions { grid-template-columns: 1fr; }
+  .mobile-cta {
+    position: fixed;
+    z-index: 40;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 12px;
+    border-top: 1px solid var(--line);
+    background: rgba(5,6,10,.88);
+    backdrop-filter: blur(16px);
+    padding: 10px 14px;
+  }
+  .mobile-cta span { display: block; color: var(--muted); font-size: 12px; font-weight: 800; }
+  .mobile-cta b { display: block; color: var(--yellow); font-size: 16px; }
+  .mobile-cta .button { min-height: 42px; padding: 0 16px; font-size: 13px; }
+  footer { padding-bottom: 84px; }
+}
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: .001ms !important;
+    animation-iteration-count: 1 !important;
+    scroll-behavior: auto !important;
+    transition-duration: .001ms !important;
+  }
+}
+</style>
+</head>
+<body>
+  <div class="topbar">Oferta: de R$ 3.800 por R$ 2.000</div>
+
+  <nav class="nav">
+    <div class="shell nav-inner">
+      <a href="#" class="brand" aria-label="Imersivo Jarvis">
+        <span class="brand-mark" aria-hidden="true"></span>
+        <span>Imersivo Jarvis</span>
+      </a>
+      <div class="nav-links" aria-label="Navegação principal">
+        <a href="#construir">Construção</a>
+        <a href="#jornada">Jornada</a>
+        <a href="#oferta">Oferta</a>
+        <a href="#contato">Contato</a>
+      </div>
+      <a class="button button-primary" href="#oferta">Garantir vaga</a>
+    </div>
+  </nav>
+
+  <header class="hero">
+    <div class="hero-image" aria-hidden="true"></div>
+    <div class="aurora" aria-hidden="true"></div>
+    <div class="noise" aria-hidden="true"></div>
+
+    <div class="shell">
+      <div class="hero-content reveal">
+        <div class="eyebrow">
+          <span class="pulse" aria-hidden="true"></span>
+          3 dias presenciais para criar seu assistente com IA.
+        </div>
+        <span class="hero-date">26 a 28 de junho de 2026</span>
+        <h1>Imersivo <span class="grad">Jarvis</span></h1>
+        <p class="hero-copy">
+          Construa um assistente pessoal com IA, voz, memória, ferramentas e automações para operar tarefas, buscar informações e executar rotinas no seu fluxo de trabalho.
+        </p>
+        <div class="hero-highlight" aria-label="Local do imersivo">
+          <span>Local do imersivo</span>
+          <strong>Refúgio Inema</strong>
+          <small>Canela - RS</small>
+        </div>
+        <div class="hero-actions">
+          <a class="button button-primary" href="#oferta">Quero criar meu Jarvis</a>
+          <a class="button button-secondary" href="#construir">Ver o que vou construir</a>
+        </div>
+
+        <div class="hero-stats" aria-label="Resumo do imersivo">
+          <div class="stat"><b>3</b><span>dias presenciais</span></div>
+          <div class="stat"><b>IA</b><span>voz, memória e agentes</span></div>
+          <div class="stat"><b>1</b><span>assistente funcional</span></div>
+          <div class="stat"><b>API</b><span>integrações e automações</span></div>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <div class="marquee" aria-hidden="true">
+    <div class="marquee-track">
+      <span>VOZ</span>•<span>MEMÓRIA</span>•<span>AGENTES</span>•<span>FERRAMENTAS</span>•<span>AUTOMAÇÕES</span>•<span>INTEGRAÇÕES</span>•<span>ROTINAS</span>•<span>DEPLOY</span>•
+      <span>VOZ</span>•<span>MEMÓRIA</span>•<span>AGENTES</span>•<span>FERRAMENTAS</span>•<span>AUTOMAÇÕES</span>•<span>INTEGRAÇÕES</span>•<span>ROTINAS</span>•<span>DEPLOY</span>•
+    </div>
+  </div>
+
+  <main>
+    <section class="band" id="construir">
+      <div class="shell">
+        <div class="section-head reveal">
+          <div class="section-kicker">O que você vai construir</div>
+          <h2>Um Jarvis funcional para trabalhar com você.</h2>
+          <p>Não é um SaaS genérico. É um assistente operacional com personalidade, memória, comando por voz, ferramentas e integrações úteis.</p>
+        </div>
+
+        <div class="build-grid">
+          <article class="build-item reveal"><div class="check">✓</div><h3>Interface de conversa</h3><p>Uma central para conversar, orientar e acompanhar o assistente.</p></article>
+          <article class="build-item reveal"><div class="check">✓</div><h3>Comando por voz</h3><p>Entrada por fala para acionar tarefas, pesquisas e respostas.</p></article>
+          <article class="build-item reveal"><div class="check">✓</div><h3>Memória contextual</h3><p>Registro de preferências, decisões e histórico para respostas melhores.</p></article>
+          <article class="build-item reveal"><div class="check">✓</div><h3>Agentes especialistas</h3><p>Subagentes para pesquisa, escrita, operação, planejamento e execução.</p></article>
+          <article class="build-item reveal"><div class="check">✓</div><h3>Ferramentas e APIs</h3><p>Conexões com serviços externos para buscar dados e executar ações.</p></article>
+          <article class="build-item reveal"><div class="check">✓</div><h3>Automações reais</h3><p>Rotinas para agenda, tarefas, mensagens, arquivos e processos repetitivos.</p></article>
+          <article class="build-item reveal"><div class="check">✓</div><h3>Painel de controle</h3><p>Visão das conversas, tarefas, status e ações executadas.</p></article>
+          <article class="build-item reveal"><div class="check">✓</div><h3>Segurança de chaves</h3><p>Organização de API keys, permissões e limites de execução.</p></article>
+          <article class="build-item reveal"><div class="check">✓</div><h3>Deploy e uso diário</h3><p>Publicação do assistente para uso real depois do imersivo.</p></article>
+        </div>
+      </div>
+    </section>
+
+    <section class="band band-soft" id="jornada">
+      <div class="shell">
+        <div class="section-head reveal">
+          <div class="section-kicker">A jornada</div>
+          <h2>Três dias para sair da ideia e chegar ao seu assistente pessoal.</h2>
+        </div>
+        <div class="timeline">
+          <article class="day reveal">
+            <div class="day-number">Dia 1</div>
+            <h3>Persona e arquitetura</h3>
+            <p>Definição do papel do Jarvis, escopo, canais de conversa, estrutura de memória, ferramentas e fluxo base.</p>
+          </article>
+          <article class="day reveal">
+            <div class="day-number">Dia 2</div>
+            <h3>Voz, memória e agentes</h3>
+            <p>Construção do núcleo conversacional, comandos por voz, memória contextual, agentes especialistas e chamadas de ferramentas.</p>
+          </article>
+          <article class="day reveal">
+            <div class="day-number">Dia 3</div>
+            <h3>Automações e operação</h3>
+            <p>Integrações, rotinas, painel de controle, segurança, publicação e plano de uso do assistente no dia a dia.</p>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section class="band" id="oferta">
+      <div class="shell offer-wrap">
+        <div class="offer-box reveal">
+          <div class="offer-content">
+            <span class="badge">Oferta de lançamento</span>
+            <h2>Acesso ao Imersivo Jarvis</h2>
+            <p class="lead">3 dias presenciais com código, prompts, arquitetura e suporte para construir seu assistente pessoal com IA.</p>
+            <div class="price-before">Valor promocional</div>
+            <div class="price">R$ 2.000</div>
+            <p class="payment-note">Escolha a forma de pagamento:</p>
+            <div class="payment-actions">
+              <a class="button button-primary" href="https://nubank.com.br/cobranca/m4KENiTEVEbrh9fs" target="_blank" rel="noopener noreferrer">Pagar via Pix</a>
+              <a class="button button-secondary" href="https://www.asaas.com/c/5qlm9j5zefdvrd78" target="_blank" rel="noopener noreferrer">Pagar com cartão</a>
+            </div>
+            <div class="security">
+              <span>Vagas limitadas</span>
+              <span>Formato 100% presencial</span>
+              <span>26 a 28 de junho de 2026</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="band band-soft" id="contato">
+      <div class="shell">
+        <div class="section-head reveal">
+          <div class="section-kicker">Contato</div>
+          <h2>Fale com a equipe do Imersivo Jarvis.</h2>
+          <p>Confirme sua inscrição, tire dúvidas sobre pagamento e receba as orientações práticas para participar.</p>
+        </div>
+        <div class="contact-grid">
+          <article class="contact-card reveal">
+            <span>WhatsApp</span>
+            <h3>+55 54 99642-2265</h3>
+            <p>Fale direto com a equipe para confirmar inscrição, turma e orientações do imersivo.</p>
+            <a class="button button-primary" href="https://wa.me/5554996422265" target="_blank" rel="noopener noreferrer">Chamar no WhatsApp</a>
+          </article>
+          <article class="contact-card reveal">
+            <span>E-mail</span>
+            <h3>inemapix@gmail.com</h3>
+            <p>Envie sua mensagem para tirar dúvidas sobre pagamento, local e participação.</p>
+            <a class="button button-secondary" href="mailto:inemapix@gmail.com">Enviar e-mail</a>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section class="band">
+      <div class="shell">
+        <div class="section-head reveal">
+          <div class="section-kicker">Acesse também</div>
+          <h2>Continue conectado ao ecossistema INEMA.</h2>
+        </div>
+        <div class="banner-links">
+          <a class="banner-link reveal" href="https://www.inema.club/" target="_blank" rel="noopener noreferrer">
+            <span>Portal oficial</span>
+            <h3>INEMA.CLUB</h3>
+            <p>Conteúdos, projetos e novidades do ecossistema INEMA.</p>
+            <strong>Acessar portal</strong>
+          </a>
+          <a class="banner-link reveal" href="https://inema.vip/" target="_blank" rel="noopener noreferrer">
+            <span>Comunidade</span>
+            <h3>INEMA.VIP</h3>
+            <p>Entre na comunidade e acompanhe experiências, imersivos e oportunidades.</p>
+            <strong>Entrar na comunidade</strong>
+          </a>
+        </div>
+      </div>
+    </section>
+
+    <section class="final-cta">
+      <div class="shell reveal">
+        <h2>Construa o assistente que trabalha com você.</h2>
+        <p>Voz, memória, agentes, ferramentas e automações em um imersivo presencial.</p>
+        <a class="button button-primary" href="#oferta">Garantir minha vaga</a>
+      </div>
+    </section>
+  </main>
+
+  <div class="mobile-cta">
+    <div>
+      <span>Imersivo presencial</span>
+      <b>Jarvis com IA</b>
+    </div>
+    <a class="button button-primary" href="#oferta">Garantir vaga</a>
+  </div>
+
+  <footer>
+    <div class="shell">Imersivo Jarvis · INEMA.CLUB · 2026</div>
+  </footer>
+
+<script>
+document.documentElement.classList.add("js");
+
+const revealObserver = new IntersectionObserver((entries) => {
+  entries.forEach((entry) => {
+    if (!entry.isIntersecting) return;
+    entry.target.classList.add("in");
+    revealObserver.unobserve(entry.target);
+  });
+}, { threshold: 0.12 });
+
+document.querySelectorAll(".reveal").forEach((element) => revealObserver.observe(element));
+</script>
+</body>
+</html>
