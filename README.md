@@ -1,6 +1,6 @@
 # Imersão Vibe Code - Estrutura Jarvis
 
-Landing estática para a **Imersão Vibe Code**, mantendo o mesmo imersivo, mas com a estrutura de construção focada em um **Jarvis com IA** em vez de uma plataforma SaaS.
+Landing estática para a **Imersão Vibe Code**, mantendo o mesmo imersivo, mas com a estrutura de construção focada em um **Jarvis com IA**.
 
 ## Publicação
 
